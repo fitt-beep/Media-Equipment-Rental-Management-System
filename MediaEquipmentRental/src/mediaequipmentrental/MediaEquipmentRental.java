@@ -4,15 +4,9 @@
  */
 package mediaequipmentrental;
 
-/**
- *
- * @author User
- */
 public class MediaEquipmentRental {
 
-    /**
-     * @param args the command line arguments
-     */
+    private String name;
     public static void main(String[] args) {
         // TODO code application logic here
     }
