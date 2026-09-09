@@ -6,7 +6,8 @@ package mediaequipmentrental;
 
 public class MediaEquipmentRental {
 
-    private String name;
+    private String equipmentName;
+    
     public static void main(String[] args) {
         // TODO code application logic here
     }
