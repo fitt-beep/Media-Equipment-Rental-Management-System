@@ -7,10 +7,10 @@ package mediaequipmentrental;
 public class MediaEquipmentRental {
 
     private String equipmentName;
+    private String equipmentID;
     
     public static void main(String[] args) {
         // TODO code application logic here
     }
     
 }
-....
