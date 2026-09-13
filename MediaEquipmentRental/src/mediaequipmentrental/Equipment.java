@@ -41,6 +41,8 @@ public abstract class Equipment {
     public void setAvailability(boolean availability) {
     this.availability = availability;
     }
+    
+    public abstract double calculateRentalCost(int days);
 
 }
 
