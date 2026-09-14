@@ -6,14 +6,16 @@ import java.sql.SQLException;
 
 public class DBConnection {
 
-    private static final String URL = "jdbc:sqlite:C:/Users/User/Documents/GitHub/Media-Equipment-Rental-Management-System/database/media_equipment_rental.db";
+    private static final String URL =
+        "jdbc:sqlite:../database/media_equipment_rental.db";
 
     public static Connection connect() {
         Connection conn = null;
-
+        
         try {
-            conn = DriverManager.getConnection(URL);
-            System.out.println("Database connected successfully!");
+                System.out.println("Current working directory: "
+                        + System.getProperty("user.dir"));
+                conn = DriverManager.getConnection(URL);
         } catch (SQLException e) {
             System.out.println("Database connection failed: " + e.getMessage());
         }
