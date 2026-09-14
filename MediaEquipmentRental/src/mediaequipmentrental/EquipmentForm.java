@@ -1,17 +1,54 @@
 package mediaequipmentrental;
 
 import javax.swing.JOptionPane;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 
 public class EquipmentForm extends javax.swing.JFrame {
     
     private static final java.util.logging.Logger logger = java.util.logging.Logger.getLogger(EquipmentForm.class.getName());
 
-    /**
-     * Creates new form EquipmentForm
-     */
+    
     public EquipmentForm() {
         initComponents();
+        loadEquipmentData();
     }
+    
+    private void loadEquipmentData() {
+    String sql = "SELECT equipment_id, name, type, rental_rate, availability FROM equipment";
+
+    try (Connection conn = DBConnection.connect();
+         PreparedStatement pstmt = conn.prepareStatement(sql);
+         java.sql.ResultSet rs = pstmt.executeQuery()) {
+
+        javax.swing.table.DefaultTableModel model =
+                (javax.swing.table.DefaultTableModel) tblEquipment.getModel();
+
+        model.setRowCount(0);
+
+        while (rs.next()) {
+            String equipmentID = rs.getString("equipment_id");
+            String name = rs.getString("name");
+            String type = rs.getString("type");
+            double rentalRate = rs.getDouble("rental_rate");
+            boolean availability = rs.getInt("availability") == 1;
+
+            model.addRow(new Object[]{
+                equipmentID,
+                name,
+                type,
+                rentalRate,
+                availability ? "Available" : "Not Available"
+            });
+        }
+
+    } catch (SQLException e) {
+        JOptionPane.showMessageDialog(this,
+                "Error loading equipment records: " + e.getMessage());
+    }
+}
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -22,6 +59,8 @@ public class EquipmentForm extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jScrollPane1 = new javax.swing.JScrollPane();
+        jTable1 = new javax.swing.JTable();
         jLabel1 = new javax.swing.JLabel();
         lblEquipmentID = new javax.swing.JLabel();
         txtEquipmentID = new javax.swing.JTextField();
@@ -38,6 +77,27 @@ public class EquipmentForm extends javax.swing.JFrame {
         txtRentalDays = new javax.swing.JTextField();
         cmbEquipmentType = new javax.swing.JComboBox<>();
         lblEquipmentType = new javax.swing.JLabel();
+        jScrollPane2 = new javax.swing.JScrollPane();
+        tblEquipment = new javax.swing.JTable();
+        jLabel3 = new javax.swing.JLabel();
+        jLabel4 = new javax.swing.JLabel();
+        txtSearch = new javax.swing.JTextField();
+        btnSearch = new javax.swing.JButton();
+        btnUpdateEquipment = new javax.swing.JButton();
+        btnDeleteEquipment = new javax.swing.JButton();
+
+        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null}
+            },
+            new String [] {
+                "Title 1", "Title 2", "Title 3", "Title 4"
+            }
+        ));
+        jScrollPane1.setViewportView(jTable1);
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -69,46 +129,92 @@ public class EquipmentForm extends javax.swing.JFrame {
 
         lblEquipmentType.setText("Equipment Type:");
 
+        tblEquipment.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null}
+            },
+            new String [] {
+                "Equipment ID", "Name", "Type", "Rental Rate", "Availability"
+            }
+        ));
+        jScrollPane2.setViewportView(tblEquipment);
+
+        jLabel3.setText("Equipment Records");
+
+        jLabel4.setText("Search Equipment ID:");
+
+        btnSearch.setText("Search");
+        btnSearch.addActionListener(this::btnSearchActionPerformed);
+
+        btnUpdateEquipment.setText("Update Equipment");
+        btnUpdateEquipment.addActionListener(this::btnUpdateEquipmentActionPerformed);
+
+        btnDeleteEquipment.setText("Delete Equipment");
+        btnDeleteEquipment.addActionListener(this::btnDeleteEquipmentActionPerformed);
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(176, 176, 176)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(lblEquipmentID)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(txtEquipmentID, javax.swing.GroupLayout.PREFERRED_SIZE, 71, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(jLabel1)
+                        .addGap(201, 201, 201)
+                        .addComponent(jLabel3))
                     .addGroup(layout.createSequentialGroup()
+                        .addGap(176, 176, 176)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(jLabel4)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(txtSearch, javax.swing.GroupLayout.PREFERRED_SIZE, 71, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(btnSearch))
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(lblEquipmentID)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(txtEquipmentID, javax.swing.GroupLayout.PREFERRED_SIZE, 71, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(jLabel1)
+                            .addGroup(layout.createSequentialGroup()
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(lblName)
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addGap(16, 16, 16)
+                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                            .addComponent(lblEquipmentType)
+                                            .addGroup(layout.createSequentialGroup()
+                                                .addComponent(lblRentalRate)
+                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                                .addComponent(txtRentalRate, javax.swing.GroupLayout.PREFERRED_SIZE, 71, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addComponent(jLabel2)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addComponent(txtRentalDays, javax.swing.GroupLayout.PREFERRED_SIZE, 71, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(cmbEquipmentType, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(txtName, javax.swing.GroupLayout.PREFERRED_SIZE, 71, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(lblAvailability)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(chkAvailable, javax.swing.GroupLayout.PREFERRED_SIZE, 84, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                    .addGroup(layout.createSequentialGroup()
+                        .addContainerGap()
                         .addComponent(btnAddEquipment)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(btnClear)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(btnCalculateCost))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(lblAvailability)
-                            .addComponent(jLabel2))
+                        .addComponent(btnUpdateEquipment)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(txtRentalDays, javax.swing.GroupLayout.PREFERRED_SIZE, 71, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(chkAvailable, javax.swing.GroupLayout.PREFERRED_SIZE, 84, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(lblRentalRate)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(txtRentalRate, javax.swing.GroupLayout.PREFERRED_SIZE, 71, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(lblName)
-                            .addGroup(layout.createSequentialGroup()
-                                .addGap(16, 16, 16)
-                                .addComponent(lblEquipmentType)))
+                        .addComponent(btnCalculateCost)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(cmbEquipmentType, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(txtName, javax.swing.GroupLayout.PREFERRED_SIZE, 71, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                        .addComponent(btnDeleteEquipment))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(41, 41, 41)
+                        .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
@@ -128,15 +234,15 @@ public class EquipmentForm extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(cmbEquipmentType, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(lblEquipmentType))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 47, Short.MAX_VALUE)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(lblRentalRate, javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(txtRentalRate, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(lblRentalRate)
+                    .addComponent(txtRentalRate, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel2)
                     .addComponent(txtRentalDays, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(lblAvailability)
                     .addComponent(chkAvailable))
@@ -144,8 +250,19 @@ public class EquipmentForm extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnAddEquipment)
                     .addComponent(btnClear)
-                    .addComponent(btnCalculateCost))
-                .addGap(42, 42, 42))
+                    .addComponent(btnCalculateCost)
+                    .addComponent(btnUpdateEquipment)
+                    .addComponent(btnDeleteEquipment))
+                .addGap(23, 23, 23)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel4)
+                    .addComponent(txtSearch, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnSearch))
+                .addGap(18, 18, 18)
+                .addComponent(jLabel3)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 61, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(610, Short.MAX_VALUE))
         );
 
         pack();
@@ -153,48 +270,139 @@ public class EquipmentForm extends javax.swing.JFrame {
 
     private void btnAddEquipmentActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAddEquipmentActionPerformed
         
-        String equipmentID = txtEquipmentID.getText();
-        String name = txtName.getText();
-        double rentalRate = Double.parseDouble(txtRentalRate.getText());
-        boolean availability = chkAvailable.isSelected();
+                                                      
+            
+            String equipmentID = txtEquipmentID.getText().trim();
+            String name = txtName.getText().trim();
+            String equipmentType = cmbEquipmentType.getSelectedItem().toString();
+            
+            if (equipmentID.isEmpty() || name.isEmpty() || txtRentalRate.getText().trim().isEmpty()) {
+                JOptionPane.showMessageDialog(this,
+                        "Please fill in all required fields.");
+                return;
+            }
+            if (equipmentType.equals("Choose Equipment Type")) {
+                JOptionPane.showMessageDialog(this,
+                        "Please choose an equipment type.");
+                return;
+            }
+            
+            try {
+                double rentalRate = Double.parseDouble(txtRentalRate.getText().trim());
+                
+                if (rentalRate < 0) {
+                    JOptionPane.showMessageDialog(this,
+                            "Rental rate cannot be negative.");
+                    return;
+                }
+                
+                boolean availability = chkAvailable.isSelected();
+                Equipment equipment;
+                
+                if (equipmentType.equals("Camera")) {
+                    equipment = new Camera(
+                    equipmentID,
+                    name,
+                    rentalRate,
+                    availability
+                    );
+                
+                } else {
+                    equipment = new AudioEquipment(
+                    equipmentID,
+                    name,
+                    rentalRate,
+                    availability
+                    );
+                }
+                
+                String sql = "INSERT INTO equipment "
+                + "(equipment_id, name, type, rental_rate, availability) "
+                + "VALUES (?, ?, ?, ?, ?)";
+                
+                try (Connection conn = DBConnection.connect();
+                        PreparedStatement pstmt = conn.prepareStatement(sql)) {
+                    
+                    pstmt.setString(1, equipment.getEquipmentID());
+                    pstmt.setString(2, equipment.getName());
+                    pstmt.setString(3, equipmentType);
+                    pstmt.setDouble(4, equipment.getRentalRate());
+                    pstmt.setInt(5, equipment.isAvailable() ? 1 : 0);
+                    pstmt.executeUpdate();
+                    
+                    JOptionPane.showMessageDialog(this,
+                            "Equipment added successfully!");
+                
+                } catch (SQLException e) {
+                    JOptionPane.showMessageDialog(this,
+                            "Database error: " + e.getMessage());
+                }
+            
+            } catch (NumberFormatException e) {
+                JOptionPane.showMessageDialog(this,
+                        "Please enter a valid rental rate.");
+            }
         
-        String equipmentType = cmbEquipmentType.getSelectedItem().toString();
-        if (equipmentType.equals("Camera")) {
-            Camera camera = new Camera(equipmentID, name, rentalRate, availability);
-        } else if (equipmentType.equals("Audio Equipment")) {
-            AudioEquipment audio = new AudioEquipment(equipmentID, name, rentalRate, availability);
-        }
-        
-        JOptionPane.showMessageDialog(this, "Equipment added successfully!");
     }//GEN-LAST:event_btnAddEquipmentActionPerformed
 
     private void btnCalculateCostActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCalculateCostActionPerformed
         
-        double rentalRate = Double.parseDouble(txtRentalRate.getText());
-        int rentalDays = Integer.parseInt(txtRentalDays.getText());
+        String rentalRateText = txtRentalRate.getText().trim();
+        String rentalDaysText = txtRentalDays.getText().trim();
         String equipmentType = cmbEquipmentType.getSelectedItem().toString();
         
-        Equipment equipment;
-        
-        if (equipmentType.equals("Camera")) {
-            equipment = new Camera(
-                    txtEquipmentID.getText(),
-                    txtName.getText(),
-                    rentalRate,
-                    chkAvailable.isSelected()
-            );
-        
-        } else {
-            equipment = new AudioEquipment(
-                    txtEquipmentID.getText(),
-                    txtName.getText(),
-                    rentalRate,
-                    chkAvailable.isSelected()
-            );
+        if (rentalRateText.isEmpty() || rentalDaysText.isEmpty()) {
+            JOptionPane.showMessageDialog(this,
+                    "Please enter the rental rate and rental days.");
+            return;
         }
-        double totalCost = equipment.calculateRentalCost(rentalDays);
-        JOptionPane.showMessageDialog(this,
-                "Total Rental Cost: RM" + totalCost);
+        
+        if (equipmentType.equals("Choose Equipment Type")) {
+            JOptionPane.showMessageDialog(this,
+                    "Please choose an equipment type.");
+            return;
+        }
+        
+        try {
+            double rentalRate = Double.parseDouble(rentalRateText);
+            int rentalDays = Integer.parseInt(rentalDaysText);
+            
+            if (rentalRate < 0) {
+                JOptionPane.showMessageDialog(this,
+                        "Rental rate cannot be negative.");
+                return;
+            }
+            
+            if (rentalDays <= 0) {
+                JOptionPane.showMessageDialog(this,
+                        "Rental days must be greater than 0.");
+                return;
+            }
+            
+            Equipment equipment;
+            if (equipmentType.equals("Camera")) {
+                equipment = new Camera(
+                txtEquipmentID.getText().trim(),
+                txtName.getText().trim(),
+                rentalRate,
+                chkAvailable.isSelected()
+                );
+            
+            } else {
+                equipment = new AudioEquipment(
+                txtEquipmentID.getText().trim(),
+                txtName.getText().trim(),
+                rentalRate,
+                chkAvailable.isSelected()
+                );
+            }
+            double totalCost = equipment.calculateRentalCost(rentalDays);
+            JOptionPane.showMessageDialog(this,
+                    "Total Rental Cost: RM" + String.format("%.2f", totalCost));
+        } catch (NumberFormatException e) {
+            JOptionPane.showMessageDialog(this,
+                    "Please enter valid numbers for rental rate and rental days.");
+        }
     }//GEN-LAST:event_btnCalculateCostActionPerformed
 
     private void btnClearActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnClearActionPerformed
@@ -203,8 +411,170 @@ public class EquipmentForm extends javax.swing.JFrame {
         txtName.setText("");
         txtRentalRate.setText("");
         txtRentalDays.setText("");
+        cmbEquipmentType.setSelectedIndex(0);
         chkAvailable.setSelected(false);
+        
     }//GEN-LAST:event_btnClearActionPerformed
+
+    private void btnSearchActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSearchActionPerformed
+        
+        String searchID = txtSearch.getText().trim();
+        
+        if (searchID.isEmpty()) {
+            JOptionPane.showMessageDialog(this,
+                    "Please enter an Equipment ID to search.");
+            return;
+        }
+        
+        String sql = "SELECT equipment_id, name, type, rental_rate, availability "
+                + "FROM equipment WHERE equipment_id = ?";
+        
+        try (Connection conn = DBConnection.connect();
+                PreparedStatement pstmt = conn.prepareStatement(sql)) {
+            pstmt.setString(1, searchID);
+            
+            try (java.sql.ResultSet rs = pstmt.executeQuery()) {
+                if (rs.next()) {
+                    
+                    txtEquipmentID.setText(rs.getString("equipment_id"));
+                    txtName.setText(rs.getString("name"));
+                    cmbEquipmentType.setSelectedItem(rs.getString("type"));
+                    txtRentalRate.setText(String.valueOf(rs.getDouble("rental_rate")));
+                    chkAvailable.setSelected(rs.getInt("availability") == 1);
+                    JOptionPane.showMessageDialog(this,
+                            "Equipment found!");
+                
+                } else {
+                    JOptionPane.showMessageDialog(this,
+                            "Equipment not found.");
+                }
+            }
+        
+        } catch (SQLException e) {
+            JOptionPane.showMessageDialog(this,
+                    "Database error: " + e.getMessage());
+        }
+    }//GEN-LAST:event_btnSearchActionPerformed
+
+    private void btnUpdateEquipmentActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnUpdateEquipmentActionPerformed
+        
+        String equipmentID = txtEquipmentID.getText().trim();
+        String name = txtName.getText().trim();
+        String equipmentType = cmbEquipmentType.getSelectedItem().toString();
+        String rentalRateText = txtRentalRate.getText().trim();
+        
+        if (equipmentID.isEmpty() || name.isEmpty() || rentalRateText.isEmpty()) {
+            JOptionPane.showMessageDialog(this,
+                    "Please fill in all required fields.");
+            return;
+        }
+        
+        if (equipmentType.equals("Choose Equipment Type")) {
+            JOptionPane.showMessageDialog(this,
+                    "Please choose an equipment type.");
+            return;
+        }
+        
+        try {
+            double rentalRate = Double.parseDouble(rentalRateText);
+            if (rentalRate < 0) {
+                JOptionPane.showMessageDialog(this,
+                        "Rental rate cannot be negative.");
+                return;
+            }
+            boolean availability = chkAvailable.isSelected();
+            
+            String sql = "UPDATE equipment SET name = ?, type = ?, "
+                    + "rental_rate = ?, availability = ? "
+                    + "WHERE equipment_id = ?";
+            
+            try (Connection conn = DBConnection.connect();
+                    PreparedStatement pstmt = conn.prepareStatement(sql)) {
+                pstmt.setString(1, name);
+                pstmt.setString(2, equipmentType);
+                pstmt.setDouble(3, rentalRate);
+                pstmt.setInt(4, availability ? 1 : 0);
+                pstmt.setString(5, equipmentID);
+                
+                int rowsUpdated = pstmt.executeUpdate();
+                if (rowsUpdated > 0) {
+                    JOptionPane.showMessageDialog(this,
+                            "Equipment updated successfully!");
+                    loadEquipmentData();
+                } else {
+                    JOptionPane.showMessageDialog(this,
+                            "Equipment ID not found.");
+                }
+            }
+        
+        } catch (NumberFormatException e) {
+            JOptionPane.showMessageDialog(this,
+                    "Please enter a valid rental rate.");
+        } catch (SQLException e) {
+            JOptionPane.showMessageDialog(this,
+                    "Database error: " + e.getMessage());
+        }
+    }//GEN-LAST:event_btnUpdateEquipmentActionPerformed
+
+    private void btnDeleteEquipmentActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDeleteEquipmentActionPerformed
+        
+        String equipmentID = txtEquipmentID.getText().trim();
+        
+        if (equipmentID.isEmpty()) {
+            JOptionPane.showMessageDialog(this,
+            "Please enter an Equipment ID.");
+            return;
+        }
+        
+        String checkSQL = "SELECT equipment_id FROM equipment WHERE equipment_id = ?";
+        
+        try (Connection conn = DBConnection.connect();
+                PreparedStatement checkStmt = conn.prepareStatement(checkSQL)) {
+            
+            checkStmt.setString(1, equipmentID);
+            
+            try (ResultSet rs = checkStmt.executeQuery()) {
+                
+                if (!rs.next()) {
+                    JOptionPane.showMessageDialog(this,
+                            "Equipment ID not found.");
+                    return;
+                }
+            }
+            
+            int confirm = JOptionPane.showConfirmDialog(
+                    this,
+                    "Are you sure you want to delete equipment " + equipmentID + "?",
+                    "Confirm Delete",
+                    JOptionPane.YES_NO_OPTION
+            );
+            
+            if (confirm != JOptionPane.YES_OPTION) {
+                return;
+            }
+            
+            String deleteSQL = "DELETE FROM equipment WHERE equipment_id = ?";
+            
+            try (PreparedStatement deleteStmt = conn.prepareStatement(deleteSQL)) {
+                deleteStmt.setString(1, equipmentID);
+                int rowsDeleted = deleteStmt.executeUpdate();
+                
+                if (rowsDeleted > 0) {
+                    JOptionPane.showMessageDialog(this,
+                            "Equipment deleted successfully!");
+                    loadEquipmentData();
+                
+                } else {
+                    JOptionPane.showMessageDialog(this,
+                            "Equipment ID not found.");
+                }
+            }
+        
+        } catch (SQLException e) {
+            JOptionPane.showMessageDialog(this,
+                    "Database error: " + e.getMessage());
+        }
+    }//GEN-LAST:event_btnDeleteEquipmentActionPerformed
 
     /**
      * @param args the command line arguments
@@ -235,18 +605,28 @@ public class EquipmentForm extends javax.swing.JFrame {
     private javax.swing.JButton btnAddEquipment;
     private javax.swing.JButton btnCalculateCost;
     private javax.swing.JButton btnClear;
+    private javax.swing.JButton btnDeleteEquipment;
+    private javax.swing.JButton btnSearch;
+    private javax.swing.JButton btnUpdateEquipment;
     private javax.swing.JCheckBox chkAvailable;
     private javax.swing.JComboBox<String> cmbEquipmentType;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
+    private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JScrollPane jScrollPane2;
+    private javax.swing.JTable jTable1;
     private javax.swing.JLabel lblAvailability;
     private javax.swing.JLabel lblEquipmentID;
     private javax.swing.JLabel lblEquipmentType;
     private javax.swing.JLabel lblName;
     private javax.swing.JLabel lblRentalRate;
+    private javax.swing.JTable tblEquipment;
     private javax.swing.JTextField txtEquipmentID;
     private javax.swing.JTextField txtName;
     private javax.swing.JTextField txtRentalDays;
     private javax.swing.JTextField txtRentalRate;
+    private javax.swing.JTextField txtSearch;
     // End of variables declaration//GEN-END:variables
 }
