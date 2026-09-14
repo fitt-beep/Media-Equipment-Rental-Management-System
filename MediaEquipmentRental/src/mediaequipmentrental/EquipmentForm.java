@@ -104,35 +104,41 @@ public class EquipmentForm extends javax.swing.JFrame {
         jLabel1.setFont(new java.awt.Font("Goudy Old Style", 1, 18)); // NOI18N
         jLabel1.setText("Media Equipment Rental Management System");
 
-        lblEquipmentID.setFont(new java.awt.Font("Modern No. 20", 0, 12)); // NOI18N
-        lblEquipmentID.setText("Equipment ID :");
+        lblEquipmentID.setFont(new java.awt.Font("Modern No. 20", 0, 14)); // NOI18N
+        lblEquipmentID.setText("Equipment ID      :");
 
-        lblName.setFont(new java.awt.Font("Modern No. 20", 0, 12)); // NOI18N
+        lblName.setFont(new java.awt.Font("Modern No. 20", 0, 14)); // NOI18N
         lblName.setText("Equipment Name :");
 
-        lblRentalRate.setFont(new java.awt.Font("Modern No. 20", 0, 12)); // NOI18N
+        lblRentalRate.setFont(new java.awt.Font("Modern No. 20", 0, 14)); // NOI18N
         lblRentalRate.setText("Rental Rate :");
 
-        lblAvailability.setText("Availability:");
+        lblAvailability.setFont(new java.awt.Font("Modern No. 20", 0, 14)); // NOI18N
+        lblAvailability.setText("Availability :");
 
+        chkAvailable.setFont(new java.awt.Font("Sitka Text", 0, 14)); // NOI18N
         chkAvailable.setText("Available");
+        chkAvailable.addActionListener(this::chkAvailableActionPerformed);
 
+        btnAddEquipment.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         btnAddEquipment.setText("Add Equipment");
         btnAddEquipment.addActionListener(this::btnAddEquipmentActionPerformed);
 
+        btnClear.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         btnClear.setText("Clear");
         btnClear.addActionListener(this::btnClearActionPerformed);
 
+        btnCalculateCost.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         btnCalculateCost.setText("Calculate Cost");
         btnCalculateCost.addActionListener(this::btnCalculateCostActionPerformed);
 
-        jLabel2.setFont(new java.awt.Font("Modern No. 20", 0, 12)); // NOI18N
+        jLabel2.setFont(new java.awt.Font("Modern No. 20", 0, 14)); // NOI18N
         jLabel2.setText("Rental Days :");
 
         cmbEquipmentType.setFont(new java.awt.Font("Palatino Linotype", 0, 12)); // NOI18N
         cmbEquipmentType.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Choose Equipment Type", "Camera", "Audio Equipment" }));
 
-        lblEquipmentType.setFont(new java.awt.Font("Modern No. 20", 0, 12)); // NOI18N
+        lblEquipmentType.setFont(new java.awt.Font("Modern No. 20", 0, 14)); // NOI18N
         lblEquipmentType.setText("Equipment Type :");
 
         tblEquipment.setModel(new javax.swing.table.DefaultTableModel(
@@ -155,9 +161,11 @@ public class EquipmentForm extends javax.swing.JFrame {
         btnSearch.setText("Search");
         btnSearch.addActionListener(this::btnSearchActionPerformed);
 
+        btnUpdateEquipment.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         btnUpdateEquipment.setText("Update Equipment");
         btnUpdateEquipment.addActionListener(this::btnUpdateEquipmentActionPerformed);
 
+        btnDeleteEquipment.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         btnDeleteEquipment.setText("Delete Equipment");
         btnDeleteEquipment.addActionListener(this::btnDeleteEquipmentActionPerformed);
 
@@ -189,42 +197,39 @@ public class EquipmentForm extends javax.swing.JFrame {
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                         .addComponent(btnCalculateCost)
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                        .addComponent(btnDeleteEquipment))))
-                            .addGroup(layout.createSequentialGroup()
-                                .addGap(57, 57, 57)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addGroup(layout.createSequentialGroup()
-                                        .addComponent(jLabel4)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                        .addComponent(txtSearch, javax.swing.GroupLayout.PREFERRED_SIZE, 71, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                        .addComponent(btnSearch))
-                                    .addGroup(layout.createSequentialGroup()
-                                        .addComponent(lblAvailability)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                        .addComponent(chkAvailable, javax.swing.GroupLayout.PREFERRED_SIZE, 84, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                            .addGroup(layout.createSequentialGroup()
-                                .addGap(18, 18, 18)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addGroup(layout.createSequentialGroup()
-                                        .addGap(143, 143, 143)
+                                        .addComponent(btnDeleteEquipment))
+                                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                            .addComponent(lblAvailability)
+                                            .addComponent(lblEquipmentType))
                                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                             .addGroup(layout.createSequentialGroup()
-                                                .addComponent(lblRentalRate)
                                                 .addGap(18, 18, 18)
-                                                .addComponent(txtRentalRate, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                                .addComponent(cmbEquipmentType, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                                             .addGroup(layout.createSequentialGroup()
-                                                .addComponent(jLabel2)
-                                                .addGap(18, 18, 18)
-                                                .addComponent(txtRentalDays, javax.swing.GroupLayout.PREFERRED_SIZE, 118, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                                    .addComponent(txtName, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(txtEquipmentID, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                                .addGap(54, 54, 54)
+                                                .addComponent(chkAvailable)))
+                                        .addGap(153, 153, 153))))
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(57, 57, 57)
+                                .addComponent(jLabel4)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(lblEquipmentType)
+                                .addComponent(txtSearch, javax.swing.GroupLayout.PREFERRED_SIZE, 71, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(btnSearch))
+                            .addGroup(layout.createSequentialGroup()
                                 .addGap(18, 18, 18)
-                                .addComponent(cmbEquipmentType, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(153, 153, 153)))))
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                    .addComponent(txtEquipmentID, javax.swing.GroupLayout.DEFAULT_SIZE, 140, Short.MAX_VALUE)
+                                    .addComponent(txtName))
+                                .addGap(26, 26, 26)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                    .addComponent(lblRentalRate)
+                                    .addComponent(jLabel2))
+                                .addGap(18, 18, 18)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(txtRentalRate, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(txtRentalDays, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE))))))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addGap(0, 0, Short.MAX_VALUE)
@@ -248,15 +253,15 @@ public class EquipmentForm extends javax.swing.JFrame {
                     .addComponent(lblName)
                     .addComponent(jLabel2)
                     .addComponent(txtRentalDays, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
+                .addGap(25, 25, 25)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(cmbEquipmentType, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(lblEquipmentType))
-                .addGap(71, 71, 71)
+                    .addComponent(lblEquipmentType)
+                    .addComponent(cmbEquipmentType, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(20, 20, 20)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(lblAvailability)
                     .addComponent(chkAvailable))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGap(50, 50, 50)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnAddEquipment)
                     .addComponent(btnClear)
@@ -272,7 +277,7 @@ public class EquipmentForm extends javax.swing.JFrame {
                 .addComponent(jLabel3)
                 .addGap(73, 73, 73)
                 .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 61, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(531, Short.MAX_VALUE))
+                .addContainerGap(529, Short.MAX_VALUE))
         );
 
         pack();
@@ -585,6 +590,10 @@ public class EquipmentForm extends javax.swing.JFrame {
                     "Database error: " + e.getMessage());
         }
     }//GEN-LAST:event_btnDeleteEquipmentActionPerformed
+
+    private void chkAvailableActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_chkAvailableActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_chkAvailableActionPerformed
 
     /**
      * @param args the command line arguments
