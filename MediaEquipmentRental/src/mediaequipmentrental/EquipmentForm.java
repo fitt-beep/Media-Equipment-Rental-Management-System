@@ -104,11 +104,13 @@ public class EquipmentForm extends javax.swing.JFrame {
         jLabel1.setFont(new java.awt.Font("Goudy Old Style", 1, 18)); // NOI18N
         jLabel1.setText("Media Equipment Rental Management System");
 
-        lblEquipmentID.setFont(new java.awt.Font("Forte", 0, 12)); // NOI18N
+        lblEquipmentID.setFont(new java.awt.Font("Modern No. 20", 0, 12)); // NOI18N
         lblEquipmentID.setText("Equipment ID :");
 
+        lblName.setFont(new java.awt.Font("Modern No. 20", 0, 12)); // NOI18N
         lblName.setText("Equipment Name :");
 
+        lblRentalRate.setFont(new java.awt.Font("Modern No. 20", 0, 12)); // NOI18N
         lblRentalRate.setText("Rental Rate :");
 
         lblAvailability.setText("Availability:");
@@ -124,11 +126,14 @@ public class EquipmentForm extends javax.swing.JFrame {
         btnCalculateCost.setText("Calculate Cost");
         btnCalculateCost.addActionListener(this::btnCalculateCostActionPerformed);
 
+        jLabel2.setFont(new java.awt.Font("Modern No. 20", 0, 12)); // NOI18N
         jLabel2.setText("Rental Days :");
 
+        cmbEquipmentType.setFont(new java.awt.Font("Palatino Linotype", 0, 12)); // NOI18N
         cmbEquipmentType.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Choose Equipment Type", "Camera", "Audio Equipment" }));
 
-        lblEquipmentType.setText("Equipment Type:");
+        lblEquipmentType.setFont(new java.awt.Font("Modern No. 20", 0, 12)); // NOI18N
+        lblEquipmentType.setText("Equipment Type :");
 
         tblEquipment.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -195,28 +200,31 @@ public class EquipmentForm extends javax.swing.JFrame {
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                         .addComponent(btnSearch))
                                     .addGroup(layout.createSequentialGroup()
-                                        .addGap(16, 16, 16)
-                                        .addComponent(lblEquipmentType)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                            .addGroup(layout.createSequentialGroup()
-                                                .addComponent(lblRentalRate)
-                                                .addGap(18, 18, 18)
-                                                .addComponent(txtRentalRate, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                            .addComponent(cmbEquipmentType, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                            .addGroup(layout.createSequentialGroup()
-                                                .addComponent(jLabel2)
-                                                .addGap(18, 18, 18)
-                                                .addComponent(txtRentalDays, javax.swing.GroupLayout.PREFERRED_SIZE, 118, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                                    .addGroup(layout.createSequentialGroup()
                                         .addComponent(lblAvailability)
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                         .addComponent(chkAvailable, javax.swing.GroupLayout.PREFERRED_SIZE, 84, javax.swing.GroupLayout.PREFERRED_SIZE))))
                             .addGroup(layout.createSequentialGroup()
                                 .addGap(18, 18, 18)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addGap(143, 143, 143)
+                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                            .addGroup(layout.createSequentialGroup()
+                                                .addComponent(lblRentalRate)
+                                                .addGap(18, 18, 18)
+                                                .addComponent(txtRentalRate, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                            .addGroup(layout.createSequentialGroup()
+                                                .addComponent(jLabel2)
+                                                .addGap(18, 18, 18)
+                                                .addComponent(txtRentalDays, javax.swing.GroupLayout.PREFERRED_SIZE, 118, javax.swing.GroupLayout.PREFERRED_SIZE))))
                                     .addComponent(txtName, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(txtEquipmentID, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE))))))
+                                    .addComponent(txtEquipmentID, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(lblEquipmentType)
+                                .addGap(18, 18, 18)
+                                .addComponent(cmbEquipmentType, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(153, 153, 153)))))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addGap(0, 0, Short.MAX_VALUE)
@@ -240,11 +248,11 @@ public class EquipmentForm extends javax.swing.JFrame {
                     .addComponent(lblName)
                     .addComponent(jLabel2)
                     .addComponent(txtRentalDays, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(cmbEquipmentType, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(lblEquipmentType))
-                .addGap(74, 74, 74)
+                .addGap(71, 71, 71)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(lblAvailability)
                     .addComponent(chkAvailable))
@@ -264,7 +272,7 @@ public class EquipmentForm extends javax.swing.JFrame {
                 .addComponent(jLabel3)
                 .addGap(73, 73, 73)
                 .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 61, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(541, Short.MAX_VALUE))
+                .addContainerGap(531, Short.MAX_VALUE))
         );
 
         pack();
