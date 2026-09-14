@@ -95,15 +95,15 @@
                                           <Group type="102" attributes="0">
                                               <Component id="lblRentalRate" min="-2" max="-2" attributes="0"/>
                                               <EmptySpace type="separate" max="-2" attributes="0"/>
-                                              <Component id="txtRentalRate" min="-2" pref="71" max="-2" attributes="0"/>
+                                              <Component id="txtRentalRate" min="-2" pref="120" max="-2" attributes="0"/>
                                           </Group>
                                           <Component id="cmbEquipmentType" min="-2" max="-2" attributes="0"/>
+                                          <Group type="102" alignment="0" attributes="0">
+                                              <Component id="jLabel2" min="-2" max="-2" attributes="0"/>
+                                              <EmptySpace type="separate" max="-2" attributes="0"/>
+                                              <Component id="txtRentalDays" min="-2" pref="118" max="-2" attributes="0"/>
+                                          </Group>
                                       </Group>
-                                  </Group>
-                                  <Group type="102" attributes="0">
-                                      <Component id="jLabel2" min="-2" max="-2" attributes="0"/>
-                                      <EmptySpace max="-2" attributes="0"/>
-                                      <Component id="txtRentalDays" min="-2" pref="71" max="-2" attributes="0"/>
                                   </Group>
                                   <Group type="102" alignment="0" attributes="0">
                                       <Component id="lblAvailability" min="-2" max="-2" attributes="0"/>
@@ -114,9 +114,9 @@
                           </Group>
                           <Group type="102" alignment="0" attributes="0">
                               <EmptySpace type="separate" max="-2" attributes="0"/>
-                              <Group type="103" groupAlignment="1" max="-2" attributes="0">
-                                  <Component id="txtName" alignment="0" pref="120" max="32767" attributes="0"/>
-                                  <Component id="txtEquipmentID" alignment="0" max="32767" attributes="0"/>
+                              <Group type="103" groupAlignment="0" attributes="0">
+                                  <Component id="txtName" min="-2" pref="120" max="-2" attributes="0"/>
+                                  <Component id="txtEquipmentID" min="-2" pref="120" max="-2" attributes="0"/>
                               </Group>
                           </Group>
                       </Group>
@@ -147,18 +147,15 @@
               <Group type="103" groupAlignment="3" attributes="0">
                   <Component id="txtName" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="lblName" alignment="0" min="-2" max="-2" attributes="0"/>
+                  <Component id="jLabel2" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="txtRentalDays" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
               <EmptySpace max="-2" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
                   <Component id="cmbEquipmentType" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="lblEquipmentType" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
-              <EmptySpace min="-2" pref="34" max="-2" attributes="0"/>
-              <Group type="103" groupAlignment="0" attributes="0">
-                  <Component id="jLabel2" min="-2" max="-2" attributes="0"/>
-                  <Component id="txtRentalDays" min="-2" max="-2" attributes="0"/>
-              </Group>
-              <EmptySpace type="separate" max="-2" attributes="0"/>
+              <EmptySpace min="-2" pref="74" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
                   <Component id="lblAvailability" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="chkAvailable" alignment="3" min="-2" max="-2" attributes="0"/>
@@ -197,6 +194,9 @@
     </Component>
     <Component class="javax.swing.JLabel" name="lblEquipmentID">
       <Properties>
+        <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+          <Font name="Forte" size="12" style="0"/>
+        </Property>
         <Property name="text" type="java.lang.String" value="Equipment ID :"/>
       </Properties>
     </Component>
@@ -211,7 +211,7 @@
     </Component>
     <Component class="javax.swing.JLabel" name="lblRentalRate">
       <Properties>
-        <Property name="text" type="java.lang.String" value="Rental Rate:"/>
+        <Property name="text" type="java.lang.String" value="Rental Rate :"/>
       </Properties>
     </Component>
     <Component class="javax.swing.JTextField" name="txtRentalRate">
@@ -252,7 +252,7 @@
     </Component>
     <Component class="javax.swing.JLabel" name="jLabel2">
       <Properties>
-        <Property name="text" type="java.lang.String" value="Rental Days:"/>
+        <Property name="text" type="java.lang.String" value="Rental Days :"/>
       </Properties>
     </Component>
     <Component class="javax.swing.JTextField" name="txtRentalDays">
