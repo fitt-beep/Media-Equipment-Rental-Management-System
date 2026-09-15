@@ -320,8 +320,8 @@ public class EquipmentForm extends javax.swing.JFrame {
                 }
                 
                 String sql = "INSERT INTO equipment "
-                + "(equipment_id, name, type, rental_rate, availability) "
-                + "VALUES (?, ?, ?, ?, ?)";
+                + "(equipment_id, name, type, rental_rate) "
+                + "VALUES (?, ?, ?, ?)";
                 
                 try (Connection conn = DBConnection.connect();
                         PreparedStatement pstmt = conn.prepareStatement(sql)) {
@@ -330,7 +330,6 @@ public class EquipmentForm extends javax.swing.JFrame {
                     pstmt.setString(2, equipment.getName());
                     pstmt.setString(3, equipmentType);
                     pstmt.setDouble(4, equipment.getRentalRate());
-                    pstmt.setInt(5, equipment.isAvailable() ? 1 : 0);
                     pstmt.executeUpdate();
                     
                     JOptionPane.showMessageDialog(this,
@@ -387,16 +386,14 @@ public class EquipmentForm extends javax.swing.JFrame {
                 equipment = new Camera(
                 txtEquipmentID.getText().trim(),
                 txtName.getText().trim(),
-                rentalRate,
-                chkAvailable.isSelected()
+                rentalRate
                 );
             
             } else {
                 equipment = new AudioEquipment(
                 txtEquipmentID.getText().trim(),
                 txtName.getText().trim(),
-                rentalRate,
-                chkAvailable.isSelected()
+                rentalRate
                 );
             }
             double totalCost = equipment.calculateRentalCost(rentalDays);
@@ -415,7 +412,6 @@ public class EquipmentForm extends javax.swing.JFrame {
         txtRentalRate.setText("");
         txtRentalDays.setText("");
         cmbEquipmentType.setSelectedIndex(0);
-        chkAvailable.setSelected(false);
         
     }//GEN-LAST:event_btnClearActionPerformed
 
@@ -429,7 +425,7 @@ public class EquipmentForm extends javax.swing.JFrame {
             return;
         }
         
-        String sql = "SELECT equipment_id, name, type, rental_rate, availability "
+        String sql = "SELECT equipment_id, name, type, rental_rate "
                 + "FROM equipment WHERE equipment_id = ?";
         
         try (Connection conn = DBConnection.connect();
@@ -443,7 +439,6 @@ public class EquipmentForm extends javax.swing.JFrame {
                     txtName.setText(rs.getString("name"));
                     cmbEquipmentType.setSelectedItem(rs.getString("type"));
                     txtRentalRate.setText(String.valueOf(rs.getDouble("rental_rate")));
-                    chkAvailable.setSelected(rs.getInt("availability") == 1);
                     JOptionPane.showMessageDialog(this,
                             "Equipment found!");
                 
@@ -485,10 +480,9 @@ public class EquipmentForm extends javax.swing.JFrame {
                         "Rental rate cannot be negative.");
                 return;
             }
-            boolean availability = chkAvailable.isSelected();
             
             String sql = "UPDATE equipment SET name = ?, type = ?, "
-                    + "rental_rate = ?, availability = ? "
+                    + "rental_rate = ? "
                     + "WHERE equipment_id = ?";
             
             try (Connection conn = DBConnection.connect();
@@ -496,8 +490,7 @@ public class EquipmentForm extends javax.swing.JFrame {
                 pstmt.setString(1, name);
                 pstmt.setString(2, equipmentType);
                 pstmt.setDouble(3, rentalRate);
-                pstmt.setInt(4, availability ? 1 : 0);
-                pstmt.setString(5, equipmentID);
+                pstmt.setString(4, equipmentID);
                 
                 int rowsUpdated = pstmt.executeUpdate();
                 if (rowsUpdated > 0) {
