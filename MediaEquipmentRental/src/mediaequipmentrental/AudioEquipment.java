@@ -1,14 +1,13 @@
 package mediaequipmentrental;
 
+public class AudioEquipment extends Equipment {
 
-public class AudioEquipment extends Equipment{
-    
-    public AudioEquipment(String equipmentID, String name, double rentalRate, boolean availability) {
-        super(equipmentID, name, rentalRate, availability);
+    public AudioEquipment(String equipmentID, String name, double rentalRate) {
+        super(equipmentID, name, rentalRate);
     }
 
     @Override
     public double calculateRentalCost(int days) {
-    return (getRentalRate() * days) + 10.00;
+        return (getRentalRate() * days) + 10.00;
     }
 }
