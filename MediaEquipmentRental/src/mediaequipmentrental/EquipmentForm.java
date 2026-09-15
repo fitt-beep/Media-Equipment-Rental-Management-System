@@ -17,11 +17,11 @@ public class EquipmentForm extends javax.swing.JFrame {
     }
     
     private void loadEquipmentData() {
-    String sql = "SELECT equipment_id, name, type, rental_rate, availability FROM equipment";
+    String sql = "SELECT equipment_id, name, type, rental_rate FROM equipment";
 
     try (Connection conn = DBConnection.connect();
          PreparedStatement pstmt = conn.prepareStatement(sql);
-         java.sql.ResultSet rs = pstmt.executeQuery()) {
+         ResultSet rs = pstmt.executeQuery()) {
 
         javax.swing.table.DefaultTableModel model =
                 (javax.swing.table.DefaultTableModel) tblEquipment.getModel();
@@ -33,14 +33,12 @@ public class EquipmentForm extends javax.swing.JFrame {
             String name = rs.getString("name");
             String type = rs.getString("type");
             double rentalRate = rs.getDouble("rental_rate");
-            boolean availability = rs.getInt("availability") == 1;
 
             model.addRow(new Object[]{
                 equipmentID,
                 name,
                 type,
-                rentalRate,
-                availability ? "Available" : "Not Available"
+                rentalRate
             });
         }
 
@@ -259,11 +257,12 @@ public class EquipmentForm extends javax.swing.JFrame {
                     .addComponent(lblRentalRate)
                     .addComponent(txtRentalRate, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(txtName, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(lblName)
-                    .addComponent(jLabel2)
-                    .addComponent(txtRentalDays, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(txtName, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jLabel2)
+                        .addComponent(txtRentalDays, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addGap(25, 25, 25)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(lblEquipmentType)
