@@ -5,51 +5,32 @@ public abstract class Equipment {
     private String equipmentID;
     private String name;
     private double rentalRate;
-    private boolean availability;
-    
-    public Equipment(String equipmentID, String name, double rentalRate, boolean availability) {
-    this.equipmentID = equipmentID;
-    this.name = name;
-    this.rentalRate = rentalRate;
-    this.availability = availability;
+
+    public Equipment(String equipmentID, String name, double rentalRate) {
+        this.equipmentID = equipmentID;
+        this.name = name;
+        this.rentalRate = rentalRate;
     }
-    
+
     public String getEquipmentID() {
-    return equipmentID;
+        return equipmentID;
     }
-    
+
     public String getName() {
-    return name;
+        return name;
     }
-    
+
     public double getRentalRate() {
-    return rentalRate;
+        return rentalRate;
     }
-    
-    public boolean isAvailable() {
-    return availability;
-    }
-    
+
     public void setName(String name) {
-    this.name = name;
+        this.name = name;
     }
-    
+
     public void setRentalRate(double rentalRate) {
-    this.rentalRate = rentalRate;
+        this.rentalRate = rentalRate;
     }
-    
-    public void setAvailability(boolean availability) {
-    this.availability = availability;
-    }
-    
+
     public abstract double calculateRentalCost(int days);
-
 }
-
-/*
- * Created the Equipment abstract class.
- * Added attributes for equipment ID, name, rental rate, and availability.
- * Added a constructor to initialize the equipment details.
- * Added getter methods to retrieve the equipment information.
- * Added setter methods to update the equipment information.
- */
