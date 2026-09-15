@@ -66,8 +66,6 @@ public class EquipmentForm extends javax.swing.JFrame {
         txtName = new javax.swing.JTextField();
         lblRentalRate = new javax.swing.JLabel();
         txtRentalRate = new javax.swing.JTextField();
-        lblAvailability = new javax.swing.JLabel();
-        chkAvailable = new javax.swing.JCheckBox();
         btnAddEquipment = new javax.swing.JButton();
         btnClear = new javax.swing.JButton();
         btnCalculateCost = new javax.swing.JButton();
@@ -111,13 +109,6 @@ public class EquipmentForm extends javax.swing.JFrame {
         lblRentalRate.setFont(new java.awt.Font("Modern No. 20", 0, 14)); // NOI18N
         lblRentalRate.setText("Rental Rate :");
 
-        lblAvailability.setFont(new java.awt.Font("Modern No. 20", 0, 14)); // NOI18N
-        lblAvailability.setText("Availability :");
-
-        chkAvailable.setFont(new java.awt.Font("Sitka Text", 0, 14)); // NOI18N
-        chkAvailable.setText("Available");
-        chkAvailable.addActionListener(this::chkAvailableActionPerformed);
-
         btnAddEquipment.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         btnAddEquipment.setText("Add ");
         btnAddEquipment.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
@@ -145,13 +136,13 @@ public class EquipmentForm extends javax.swing.JFrame {
         tblEquipment.setFont(new java.awt.Font("Modern No. 20", 0, 14)); // NOI18N
         tblEquipment.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null}
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null}
             },
             new String [] {
-                "Equipment ID", "Name", "Type", "Rental Rate", "Availability"
+                "Equipment ID", "Name", "Type", "Rental Rate"
             }
         ));
         jScrollPane2.setViewportView(tblEquipment);
@@ -190,16 +181,9 @@ public class EquipmentForm extends javax.swing.JFrame {
                     .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                         .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                             .addGap(28, 28, 28)
-                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                .addComponent(lblAvailability)
-                                .addComponent(lblEquipmentType))
-                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                .addGroup(layout.createSequentialGroup()
-                                    .addGap(54, 54, 54)
-                                    .addComponent(chkAvailable))
-                                .addGroup(layout.createSequentialGroup()
-                                    .addGap(18, 18, 18)
-                                    .addComponent(cmbEquipmentType, javax.swing.GroupLayout.PREFERRED_SIZE, 171, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addComponent(lblEquipmentType)
+                            .addGap(18, 18, 18)
+                            .addComponent(cmbEquipmentType, javax.swing.GroupLayout.PREFERRED_SIZE, 171, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addGap(149, 149, 149))
                         .addGroup(layout.createSequentialGroup()
                             .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -267,11 +251,7 @@ public class EquipmentForm extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(lblEquipmentType)
                     .addComponent(cmbEquipmentType, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(20, 20, 20)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(lblAvailability)
-                    .addComponent(chkAvailable))
-                .addGap(18, 18, 18)
+                .addGap(60, 60, 60)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnAddEquipment)
                     .addComponent(btnClear)
@@ -601,10 +581,6 @@ public class EquipmentForm extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_btnDeleteEquipmentActionPerformed
 
-    private void chkAvailableActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_chkAvailableActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_chkAvailableActionPerformed
-
     /**
      * @param args the command line arguments
      */
@@ -637,7 +613,6 @@ public class EquipmentForm extends javax.swing.JFrame {
     private javax.swing.JButton btnDeleteEquipment;
     private javax.swing.JButton btnSearch;
     private javax.swing.JButton btnUpdateEquipment;
-    private javax.swing.JCheckBox chkAvailable;
     private javax.swing.JComboBox<String> cmbEquipmentType;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
@@ -646,7 +621,6 @@ public class EquipmentForm extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JTable jTable1;
-    private javax.swing.JLabel lblAvailability;
     private javax.swing.JLabel lblEquipmentID;
     private javax.swing.JLabel lblEquipmentType;
     private javax.swing.JLabel lblName;
