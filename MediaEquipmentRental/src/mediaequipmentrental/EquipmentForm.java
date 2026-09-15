@@ -301,23 +301,21 @@ public class EquipmentForm extends javax.swing.JFrame {
                     return;
                 }
                 
-                boolean availability = chkAvailable.isSelected();
+               
                 Equipment equipment;
                 
                 if (equipmentType.equals("Camera")) {
                     equipment = new Camera(
                     equipmentID,
                     name,
-                    rentalRate,
-                    availability
+                    rentalRate
                     );
                 
                 } else {
                     equipment = new AudioEquipment(
                     equipmentID,
                     name,
-                    rentalRate,
-                    availability
+                    rentalRate
                     );
                 }
                 
